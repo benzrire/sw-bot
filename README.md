@@ -34,6 +34,7 @@ def captureRegion(region):
   - [pyautogui](https://pyautogui.readthedocs.io/en/latest/introduction.html) เป็น windows action module
   - [opencv](https://pypi.org/project/opencv-python/) เป็น image processing lib
   - [pytesseract](https://pypi.org/project/pytesseract/) เป็น python module สำหรับใช้ tesseract
+  - [matplotlib](https://matplotlib.org/users/installing.html) เอาไว้ plot รูปตอน debug
   
 ## installation
 1. create folder name 'static' เอาไว้เก็บรูปภาพที่คาดว่าจะใช้ในการ compare image เพราะ method getImageFromStatic จะเข้าไปดึงรูปจากใน 'static' folder
