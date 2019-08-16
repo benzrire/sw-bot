@@ -1,30 +1,28 @@
-# Summoners War Game Bot
-
-> คำเตือน!! ทำใช้เอง ไม่การันตีโดนแบน5555 กรุณาใช้วิจารณญาณในการอ่าน และใช้งานด้วยเน้อ
+# GGbot
 
 ## important
 
-สำหรับเวอร์ชัน 1 ผมใช้ python 2.7.8 ถ้าใครใช้ python 3.4 ขึ้นไปถ้าจำไม่ผิด มันจะไม่ซัพพอร์ตโมดูล cStringIO ให้แก้ method captureRegion ใน module.py จาก
+สำหรับ python version 3.4 ขึ้นไปจะไม่ซัพพอร์ตโมดูล cStringIO ให้แก้ method captureRegion ใน module.py จาก
 ```
 import cStringIO
 ...
 def captureRegion(region):
   # screenshot of the region and return base64 object
-	buffer = cStringIO.StringIO()
-	image = pyautogui.screenshot(region=(region[0], region[1], region[2]-region[0], region[3]-region[1]))
-	image.save(buffer, format="png")
-	return base64.b64encode(buffer.getvalue())
+  buffer = cStringIO.StringIO()
+  image = pyautogui.screenshot(region=(region[0], region[1], region[2]-region[0], region[3]-region[1]))
+  image.save(buffer, format="png")
+  return base64.b64encode(buffer.getvalue())
 ```
 เป็น
 ```
 from io import BytesIO
 ...
 def captureRegion(region):
-	# screenshot of the region and return base64 object
-	buffer = BytesIO()
-	image = pyautogui.screenshot(region=(region[0], region[1], region[2]-region[0], region[3]-region[1]))
-	image.save(buffer, format="png")
-	return base64.b64encode(buffer.getvalue())
+  # screenshot of the region and return base64 object
+  buffer = BytesIO()
+  image = pyautogui.screenshot(region=(region[0], region[1], region[2]-region[0], region[3]-region[1]))
+  image.save(buffer, format="png")
+  return base64.b64encode(buffer.getvalue())
 ```
 
 ## requirement
@@ -32,16 +30,31 @@ def captureRegion(region):
 - [tesseract](https://www.github.com/UB-Mannheim/tesseract/wiki) ocr alpha ของ Mannheim University
 - python package
   - [pyautogui](https://pyautogui.readthedocs.io/en/latest/introduction.html) เป็น windows action module
-  - [opencv](https://pypi.org/project/opencv-python/) เป็น image processing lib
-  - [pytesseract](https://pypi.org/project/pytesseract/) เป็น python module สำหรับใช้ tesseract
-  - [matplotlib](https://matplotlib.org/users/installing.html) เอาไว้ plot รูปตอน debug
+  - [opencv](https://pypi.org/project/opencv-python/) เป็น image processing module
+  - [pytesseract](https://pypi.org/project/pytesseract/) เป็น tesseract ocr module
+  - [matplotlib](https://matplotlib.org/users/installing.html) (optional module, easy debugging)
   
 ## installation
-1. create folder name 'static' เอาไว้เก็บรูปภาพที่คาดว่าจะใช้ในการ compare image เพราะ method getImageFromStatic จะเข้าไปดึงรูปจากใน 'static' folder
-2. แก้ไข path ของ tesseract executable file ที่เราติดตั้งไว้ ในไฟล์ module.py method name 'ocr' เช่น
+1. สร้าง folder ชื่อ 'static' เพื่อเก็บรูปภาพที่คาดว่าจะใช้ในการ compare image เพราะ method getImageFromStatic จะเข้าไปดึงรูปจากใน 'static' folder
+2. แก้ไข path ของ tesseract executable file ที่เราติดตั้งไว้ ในไฟล์ module.py method name 'ocr'
 ```
 # tesseract path
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract'
 ```
 
-### ไว้กลับมาเขียน รีบบบบบ555
+## example usage
+1. สร้างไฟล์ main.py
+```
+import module as _
+
+def main():
+  _.mMoveTo([100, 100, 500, 500], 0.1)
+  _.mClick('left')
+
+if __name__ == '__main__':
+  main()
+```
+2. run powershell command
+```
+python ./main.py
+```
